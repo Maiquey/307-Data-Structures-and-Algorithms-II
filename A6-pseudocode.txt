@@ -1,0 +1,47 @@
+Bellman-Ford(G, s)
+    Initialize-Single-Source(G, s);
+    for i = 1 to n - 1 do
+        dChanged = false;
+        for each edge (u, v) ∈ E do 
+            dChanged = Relax(u, v);
+        /* This section can be removed since G has no negative cycles */
+        /*
+        for each edge (u, v) ∈ E do
+            if v.d > u.d + w(u, v) then 
+                return False;
+        */
+        if dChanged == false;
+            return true;
+    return true;
+
+Relax(u, v)
+    if v.d > u.d + w(u, v) then 
+        v.d = u.d + w(u, v); 
+        v.π = u;
+        return true;
+    return false;
+
+/* Computes L(r) and Q(r) given L(r-1) and W */
+Extend-Shortest-Paths(L(r-1), W)
+    for i = 1 to n do
+        for j = 1 to n do
+            L(r)[i, j] = ∞;
+            Q(r)[i, j] = nil;
+            for k = 1 to n do 
+                /* instead of taking the min, check if value for L(r) is overwritten */
+                if L(r-1)[i, k] + W[k, j] < L(r)[i, j] then
+                    L(r)[i, j] = L(r-1)[i, k] + W[k, j];
+                    Q(r)[i, j] = k
+                else
+                    L(r)[i, j] = L(r-1)[i, j]
+    return L(r)
+
+/* Computes L(n-1) which contains the lengths of 
+shortest paths for all pairs of vertices */
+Slow-All-Pairs-Shortest-Paths(W)
+    L(1) = W;
+    Q(1) = nil;
+    for r = 2 to n - 1 do
+        let L(r) be a new n x n matrix;
+        L(r) =Extend-Shortest-Paths(L(r-1), W);
+    return L(n-1)

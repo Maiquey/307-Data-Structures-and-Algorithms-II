@@ -1,0 +1,28 @@
+let A = input
+let longPalindrome = ""
+for i = 1 to n
+    let palindrome = ""
+    let firstHalf = Queue()
+    let secondHalf = Stack()
+    let j = i
+    let k = n
+    while j < k
+        if j+1 == k or j == k
+            if A[j] == A[k]
+                firstHalf.push(A[j])
+                secondHalf.push(A[k])
+            j++
+            k--
+        else if A[j] == A[k]
+            firstHalf.push(A[j])
+            secondHalf.push(A[k])
+            j++
+            k--
+        else
+            k--
+    while (!firstHalf.isEmpty())
+        palindrome.append(firstHalf.pop())
+    while (!secondHalf.isEmpty())
+        palindrome.append(secondHalf.pop())
+    if (palindrome.length > longPalindrome.length)
+        longPalindrome = palindrome

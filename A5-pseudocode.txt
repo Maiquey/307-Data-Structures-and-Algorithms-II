@@ -1,0 +1,46 @@
+BFS(G, s, M)
+    /* M = adjacency matrix */
+    /* Store V(G) = {1, 2, 3, ... , n} in an aux array*/
+    for each v ∈ V(G) do
+        v.color = white; 
+        v.d = ∞; 
+        v.π = nil;
+    s.color = grey; 
+    s.d = 0; 
+    s.π = nil; 
+    Q = ∅; 
+    Enqueue(Q, s); /* Q is a FIFS queue. */
+    while Q != ∅ do
+        u = Dequeue(Q);
+        v adjacent to u
+        for v ∈ V(G) do
+            if M[u,v] == 1 and v.color == white then
+                v.color = grey; 
+                v.d = u.d + 1; 
+                v.π = u; 
+                Enqueue(Q, v);
+        u.color = black
+
+DFS(G)
+    time = 0; 
+    componentCounter = 0;
+    for each u ∈ V do 
+        u.color = white;
+        u.π = nil;
+    for each u ∈ V do 
+        if u.color = white then
+            componentCounter++;
+            DFS-Visit(G, u);
+
+DFS-Visit(G, u)
+    time = time + 1; 
+    u.d = time; 
+    u.color = gray;
+    for each edge (u, v) do 
+        if v.color = white then 
+            v.π = u;
+            DFS-Visit(G, v);
+    u.color = black; 
+    time = time + 1; 
+    u.f = time;
+    u.c = componentCounter

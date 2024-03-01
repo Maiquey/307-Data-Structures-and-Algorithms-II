@@ -1,0 +1,62 @@
+q1a
+
+RANDOM-SEARCH(A, n, x)
+    B = arr(n)
+    B[1..n] = [0]
+    checked = 0
+    while checked != n
+        i = random(i..n)
+        if (A[i] == x)
+            return i
+        else if (B[i] == 0)
+            B[i] = 1
+            checked++;
+        endif
+    endwhile
+    return -1 /* no x found */
+
+q2
+
+MIN-HEAPIFY(A, i)
+    l = Left(i)
+    r = Right(i)
+    if l <= s(A) and A[l] < A[i]
+        min = l 
+    else
+        min = i
+    endif
+    if r <= s(A) and A[r] < A[min]
+        min = r
+    endif
+    if min != i
+        exchange A[i] and A[min]
+        MIN-HEAPIFY(A, min)
+
+HEAP-MINIMUM(A)
+    return A[1]
+
+HEAP-EXTRACT-MIN(A)
+    if s(A) < 1
+        output "error, heap underflow"
+        exit
+    endif
+    max = A[1]
+    A[1] = A[s(A)]
+    s(A) = s(A) - 1
+    MAX-HEAPIFY(A,1)
+    return max
+
+HEAP-DECREASE-KEY(A, i, key)
+    if key > A[i]
+        output "error, new key > current key"
+        exit
+    endif
+    A[i] = key
+    while i > 1 and A[Parent(i)] > A[i]
+        exchange A[i] with A[Parent(i)]
+        i = Parent(i)
+
+MIN-HEAP-INSERT(A, key)
+        s(A) = s(A) + 1
+        A[s(A)] = inf
+        HEAP-DECREASE-KEY(A, s(A), key)
